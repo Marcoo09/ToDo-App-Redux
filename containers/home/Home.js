@@ -10,11 +10,10 @@ import { connect } from "react-redux";
 import { Colors } from "../../colors/Colors";
 import { Item } from "../../components/item";
 import { Button } from "../../components/buttonCustom";
-
 import { styles } from "./styles";
 import { Actions } from "../../actions/actions";
 
-export class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
   }
@@ -37,12 +36,11 @@ export class Home extends Component {
         <StatusBar backgroundColor={Colors.customBlue} />
 
         <FlatList
-          data={this.state.todo}
+          data={this.props.todo}
           keyExtractor={(item, index) => index.toString()}
           renderItem={item => (
             <Item
               {...item.item}
-              key={item.index}
               checkboxClick={() => {
                 this.props.changeCheckBoxState(item.index);
               }}
@@ -50,11 +48,11 @@ export class Home extends Component {
           )}
         />
 
-        {this.state.todo.length > 0 ? (
+        {this.props.todo.length > 0 ? (
           <Button
             text="CLEAR ALL DONE"
             styleButton={styles.button}
-            _onPress={() => {
+            onPress={() => {
               this.props.clearAllDone();
             }}
           />
@@ -68,9 +66,11 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  data: state.data
-});
+const mapStateToProps = state => {
+  return {
+    todo: state.todo
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   clearAllDone: () => {

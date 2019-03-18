@@ -4,9 +4,9 @@ import { TouchableOpacity, Image, View } from "react-native";
 import checkboxActive from "../../resources/images/iconCheckboxActive.png";
 import checkboxinactive from "../../resources/images/iconCheckboxInactive.png";
 
-export const CheckBox = ({ checked, checkboxClick }) => (
+export const CheckBox = ({ checked, click }) => (
   <View style={styles.checkBoxContainer}>
-    <TouchableOpacity onPress={checkboxClick}>
+    <TouchableOpacity onPress={click}>
       {checked ? (
         <Image source={checkboxActive} />
       ) : (

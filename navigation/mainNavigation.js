@@ -1,5 +1,5 @@
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import { Home } from "../containers/home/Home";
+import Home from "../containers/home/Home";
 import { Colors } from "../colors/Colors";
 
 const MainNavigator = createStackNavigator(

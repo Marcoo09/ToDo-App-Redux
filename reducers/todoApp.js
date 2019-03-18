@@ -2,31 +2,36 @@ import { ActionsTypes } from "../actions/actionTypes";
 import { combineReducers } from "redux";
 
 const initialStateHome = {
-  data: [
+  todo: [
     {
-      "first-description": "Description",
-      "second-description": "Second Description",
-      status: false
+      id: 1,
+      title: "Description",
+      description: "Second Description",
+      completed: false
     },
     {
-      "first-description": "Description",
-      "second-description": "Second Description",
-      status: false
+      id: 2,
+      title: "Description",
+      description: "Second Description",
+      completed: false
     },
     {
-      "first-description": "Description",
-      "second-description": "Second Description",
-      status: false
+      id: 3,
+      title: "Description",
+      description: "Second Description",
+      completed: false
     },
     {
-      "first-description": "Description",
-      "second-description": "Second Description",
-      status: true
+      id: 4,
+      title: "Description",
+      description: "Second Description",
+      completed: true
     },
     {
-      "first-description": "Description",
-      "second-description": "Second Description",
-      status: false
+      id: 5,
+      title: "Description",
+      description: "Second Description",
+      completed: false
     }
   ]
 };
@@ -35,18 +40,18 @@ function homeReducer(state = initialStateHome, action) {
   switch (action.type) {
     case ActionsTypes.CLEAR_ALL_DONE:
       return Object.assign({}, state, {
-        data: state.data.map((item, index) => {
+        todo: state.todo.map((item, index) => {
           return Object.assign({}, item, {
-            status: false
+            completed: false
           });
         })
       });
     case ActionsTypes.CHANGE_CHECKBOX_STATE:
       return Object.assign({}, state, {
-        data: state.data.map((item, index) => {
+        todo: state.todo.map((item, index) => {
           if (index === action.payload.index) {
             return Object.assign({}, item, {
-              status: !item.status
+              completed: !item.completed
             });
           }
           return item;
