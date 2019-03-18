@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { styles } from "./styles";
 import { Colors } from "../../colors/Colors";
 import { TouchableOpacity, Text, View } from "react-native";
-import { CheckBox } from "../checkBox/CheckBox";
+import { CheckBox } from "../checkbox/Checkbox";
 
 export class Item extends Component {
   render() {
