@@ -7,40 +7,44 @@ import {
   FlatList
 } from "react-native";
 import { Colors } from "../../colors/Colors";
-import { createStackNavigator, createAppContainer } from "react-navigation";
-import { Item } from "../../components/item/Item";
-import { ButtonCustom } from "../../components/buttonCustom/ButtonCustom";
+import { Item } from "../../components/item";
+import { Button } from "../../components/buttonCustom";
 import { styles } from "./styles";
 
-class Home extends Component {
+export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
+      todo: [
         {
-          "first-description": "Description",
-          "second-description": "Second Description",
-          status: false
+          id: 1,
+          title: "Description",
+          description: "Second Description",
+          completed: false
         },
         {
-          "first-description": "Description",
-          "second-description": "Second Description",
-          status: false
+          id: 2,
+          title: "Description",
+          description: "Second Description",
+          completed: false
         },
         {
-          "first-description": "Description",
-          "second-description": "Second Description",
-          status: false
+          id: 3,
+          title: "Description",
+          description: "Second Description",
+          completed: false
         },
         {
-          "first-description": "Description",
-          "second-description": "Second Description",
-          status: true
+          id: 4,
+          title: "Description",
+          description: "Second Description",
+          completed: true
         },
         {
-          "first-description": "Description",
-          "second-description": "Second Description",
-          status: false
+          id: 5,
+          title: "Description",
+          description: "Second Description",
+          completed: false
         }
       ]
     };
@@ -64,12 +68,12 @@ class Home extends Component {
         <StatusBar backgroundColor={Colors.customBlue} />
 
         <FlatList
-          data={this.state.data}
+          data={this.state.todo}
           renderItem={item => <Item {...item.item} key={item.index} />}
         />
 
-        {this.state.data.length > 0 ? (
-          <ButtonCustom
+        {this.state.todo.length > 0 ? (
+          <Button
             text="CLEAR ALL DONE"
             styleButton={{
               alignItems: "center",
@@ -87,26 +91,3 @@ class Home extends Component {
     );
   }
 }
-
-const MainNavigator = createStackNavigator(
-  {
-    Home: Home
-  },
-  {
-    initialRouteName: "Home",
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Colors.customBlue
-      },
-      headerTintColor: Colors.white,
-      headerTitleStyle: {
-        fontWeight: "bold",
-        alignSelf: "center",
-        textAlign: "center",
-        flex: 1
-      }
-    }
-  }
-);
-
-export const AppNavigator = createAppContainer(MainNavigator);
