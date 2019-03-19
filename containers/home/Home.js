@@ -31,6 +31,7 @@ class Home extends Component {
   });
 
   render() {
+    const { navigation } = this.props;
     return (
       <View>
         <StatusBar backgroundColor={Colors.customBlue} />
@@ -40,6 +41,12 @@ class Home extends Component {
           keyExtractor={(item, index) => index.toString()}
           renderItem={item => (
             <Item
+              onPress={() => {
+                navigation.push("Detail", {
+                  ...item.item,
+                  index: item.index
+                });
+              }}
               {...item.item}
               checkboxClick={() => {
                 this.props.changeCheckBoxState(item.index);
