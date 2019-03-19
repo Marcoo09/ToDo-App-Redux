@@ -9,7 +9,7 @@ import {
 import { connect } from "react-redux";
 import { Colors } from "../../colors/Colors";
 import { Item } from "../../components/item";
-import { Button } from "../../components/buttonCustom";
+import { Button } from "../../components/button";
 import { styles } from "./styles";
 import { Actions } from "../../actions/actions";
 
@@ -23,7 +23,7 @@ class Home extends Component {
     headerLeft: <View />,
     headerRight: (
       <View style={styles.headerRightContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("NewTask")}>
           <Text style={styles.headerRightText}>+</Text>
         </TouchableOpacity>
       </View>
