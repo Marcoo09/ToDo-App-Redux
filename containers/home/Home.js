@@ -6,48 +6,16 @@ import {
   View,
   FlatList
 } from "react-native";
+import { connect } from "react-redux";
 import { Colors } from "../../colors/Colors";
 import { Item } from "../../components/item";
 import { Button } from "../../components/buttonCustom";
 import { styles } from "./styles";
+import { Actions } from "../../actions/actions";
 
-export class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      todo: [
-        {
-          id: 1,
-          title: "Description",
-          description: "Second Description",
-          completed: false
-        },
-        {
-          id: 2,
-          title: "Description",
-          description: "Second Description",
-          completed: false
-        },
-        {
-          id: 3,
-          title: "Description",
-          description: "Second Description",
-          completed: false
-        },
-        {
-          id: 4,
-          title: "Description",
-          description: "Second Description",
-          completed: true
-        },
-        {
-          id: 5,
-          title: "Description",
-          description: "Second Description",
-          completed: false
-        }
-      ]
-    };
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -68,18 +36,24 @@ export class Home extends Component {
         <StatusBar backgroundColor={Colors.customBlue} />
 
         <FlatList
-          data={this.state.todo}
-          renderItem={item => <Item {...item.item} key={item.index} />}
+          data={this.props.todo}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={item => (
+            <Item
+              {...item.item}
+              checkboxClick={() => {
+                this.props.changeCheckBoxState(item.index);
+              }}
+            />
+          )}
         />
 
-        {this.state.todo.length > 0 ? (
+        {this.props.todo.length > 0 ? (
           <Button
             text="CLEAR ALL DONE"
-            styleButton={{
-              alignItems: "center",
-              width: 204,
-              height: 48,
-              marginTop: 16
+            styleButton={styles.button}
+            onPress={() => {
+              this.props.clearAllDone();
             }}
           />
         ) : (
@@ -91,3 +65,23 @@ export class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    todo: state.todo
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  clearAllDone: () => {
+    dispatch(Actions.clearAllDone());
+  },
+  changeCheckBoxState: index => {
+    dispatch(Actions.changeCheckBoxState(index));
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

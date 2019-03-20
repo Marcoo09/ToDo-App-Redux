@@ -7,7 +7,7 @@ import { CheckBox } from "../checkbox";
 export const Item = props => (
   <TouchableOpacity
     style={{ backgroundColor: Colors.white }}
-    onPress={props._onPress}
+    onPress={props.onPress}
   >
     <View style={styles.container}>
       <View style={styles.textContainer}>
