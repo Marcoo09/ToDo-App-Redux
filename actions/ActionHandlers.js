@@ -60,3 +60,9 @@ export const markAsDone = (state, action) => {
     })
   });
 };
+
+export const getReturnedToDoData = (state, action) => {
+  return Object.assign({}, state, {
+    todo: [...action.payload.todo]
+  });
+};

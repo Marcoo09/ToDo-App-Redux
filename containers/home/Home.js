@@ -11,11 +11,14 @@ import { Colors } from "../../colors/Colors";
 import { Item } from "../../components/item";
 import { Button } from "../../components/button";
 import { styles } from "./styles";
-import { Actions } from "../../actions/actions";
+import { Actions, getToDoData } from "../../actions/actions";
 
 class Home extends Component {
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    this.props.getToDoData();
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -35,7 +38,6 @@ class Home extends Component {
     return (
       <View>
         <StatusBar backgroundColor={Colors.customBlue} />
-
         <FlatList
           data={this.props.todo}
           keyExtractor={(item, index) => index.toString()}
@@ -79,6 +81,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  getToDoData: () => {
+    dispatch(getToDoData());
+  },
   clearAllDone: () => {
     dispatch(Actions.clearAllDone());
   },

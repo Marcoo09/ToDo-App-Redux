@@ -4,46 +4,20 @@ import {
   changeCheckBoxState,
   clearAllDone,
   markAsNotDone,
-  markAsDone
+  markAsDone,
+  getReturnedToDoData
 } from "../actions/ActionHandlers";
 
 const initialState = {
-  todo: [
-    {
-      id: 1,
-      title: "Description",
-      description: "Second Description",
-      completed: false
-    },
-    {
-      id: 2,
-      title: "Description",
-      description: "Second Description",
-      completed: false
-    },
-    {
-      id: 3,
-      title: "Description",
-      description: "Second Description",
-      completed: false
-    },
-    {
-      id: 4,
-      title: "Description",
-      description: "Second Description",
-      completed: true
-    },
-    {
-      id: 5,
-      title: "Description",
-      description: "Second Description",
-      completed: false
-    }
-  ]
+  todo: []
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case ActionsTypes.GET_TO_DO_DATA_SUCCESS:
+      return getReturnedToDoData(state, action);
+    case ActionsTypes.GET_TO_DO_DATA_FAIL:
+      return getReturnedToDoData(state, action);
     case ActionsTypes.CLEAR_ALL_DONE:
       return clearAllDone(state, action);
     case ActionsTypes.CHANGE_CHECKBOX_STATE:
