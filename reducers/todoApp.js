@@ -39,24 +39,22 @@ const initialStateHome = {
 function homeReducer(state = initialStateHome, action) {
   switch (action.type) {
     case ActionsTypes.CLEAR_ALL_DONE:
-      return Object.assign({}, state, {
-        todo: state.todo.map((item, index) => {
-          return Object.assign({}, item, {
-            completed: false
-          });
+      return {
+        todo: state.todo.map(t => {
+          t.completed = false;
+          return t;
         })
-      });
+      };
+
     case ActionsTypes.CHANGE_CHECKBOX_STATE:
-      return Object.assign({}, state, {
+      return {
         todo: state.todo.map((item, index) => {
           if (index === action.payload.index) {
-            return Object.assign({}, item, {
-              completed: !item.completed
-            });
+            item.completed = !item.completed;
           }
           return item;
         })
-      });
+      };
     case ActionsTypes.HANDLE_ADD_DATA:
     case ActionsTypes.ADD_TODO:
     case ActionsTypes.ADD_TODO:
